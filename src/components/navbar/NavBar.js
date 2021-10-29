@@ -61,11 +61,21 @@ const StoreIconButton = styled('div')(({ theme }) => ({
 
 
 export default function PrimarySearchAppBar() {
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const isMenuListOpen = Boolean(anchorEl1);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleMenuListOpen = (event) => {
+    setAnchorEl1(event.currentTarget);
+  }
+  const handleMenuListClose = () => {
+    setAnchorEl1(null);
+    //handleMobileMenuClose();
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -83,6 +93,29 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const menuListId = 'primary-search-menu-list';
+  const renderMenuList = (
+    <Menu
+      anchorEl1={anchorEl1}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      id={menuListId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      open={isMenuListOpen}
+      onClose={handleMenuListClose}
+    >
+      <MenuItem onClick={handleMenuListClose}>Productos</MenuItem>
+      <MenuItem onClick={handleMenuListClose}>Tiendas</MenuItem>
+      <MenuItem onClick={handleMenuListClose}>Contacto</MenuItem>
+    </Menu>
+  );
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -123,6 +156,16 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      <MenuItem onClick={handleMenuListOpen}>
+      <IconButton
+          size="large"
+          aria-label="DropDawn Menu"
+          aria-haspopup="true"
+      >
+          <MenuIcon />
+        </IconButton>
+        <p>Menu</p>
+      </MenuItem>
       <MenuItem>
         <IconButton
           size="large"
@@ -159,6 +202,7 @@ export default function PrimarySearchAppBar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
+            onClick={handleMenuListOpen}
             sx={{ mr: 2 }}  
           >
             <MenuIcon/>
@@ -211,6 +255,7 @@ export default function PrimarySearchAppBar() {
           </Box>
         </Toolbar>
       </AppBar>
+      {renderMenuList}
       {renderMobileMenu}
       {renderMenu}
     </Box>
