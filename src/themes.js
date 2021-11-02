@@ -1,3 +1,4 @@
+import './index.css';
 export const theme1 = {  
     palette:{
       primary:{
@@ -8,5 +9,8 @@ export const theme1 = {
       secondary:{
         main: '#212121'
       }
-    }
+    },
+    typography: {
+      fontFamily: ["'Lato'"]
+    },
 }

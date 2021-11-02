@@ -1,19 +1,14 @@
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+import {Box, Drawer, Toolbar, Badge, IconButton, InputBase, MenuItem, Menu, useMediaQuery, useTheme } from '@material-ui/core';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import StoreIcon from '@mui/icons-material/Store';
+import CarWidget from '../carWidget/CarWidget';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -94,6 +89,10 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const themeNavBar = useTheme()
+
+  const isMatch = useMediaQuery(themeNavBar.breakpoints.down('sm'))
+
   const menuListId = 'primary-search-menu-list';
   const renderMenuList = (
     <Menu
@@ -111,9 +110,9 @@ export default function PrimarySearchAppBar() {
       open={isMenuListOpen}
       onClose={handleMenuListClose}
     >
-      <MenuItem onClick={handleMenuListClose}>Productos</MenuItem>
-      <MenuItem onClick={handleMenuListClose}>Tiendas</MenuItem>
-      <MenuItem onClick={handleMenuListClose}>Contacto</MenuItem>
+      <MenuItem onClick={handleMenuListClose}>Products</MenuItem>
+      <MenuItem onClick={handleMenuListClose}>Shops</MenuItem>
+      <MenuItem onClick={handleMenuListClose}>Contact</MenuItem>
     </Menu>
   );
 
@@ -156,28 +155,14 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleMenuListOpen}>
-      <IconButton
-          size="large"
-          aria-label="DropDawn Menu"
-          aria-haspopup="true"
-      >
-          <MenuIcon />
-        </IconButton>
-        <p>Menu</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="Show carts items"
-          color="secondary"
-        >
-          <Badge badgeContent={1} color="secondary">
-            <ShoppingBasketIcon />
-          </Badge>
-        </IconButton>
-        <p>Cart</p>
-      </MenuItem>
+      <Search>
+          <SearchIconWrapper >
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+          />
+        </Search>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -202,33 +187,30 @@ export default function PrimarySearchAppBar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
+            aria-controls={menuListId}
+            aria-haspopup="true"
             onClick={handleMenuListOpen}
             sx={{ mr: 2 }}  
           >
             <MenuIcon/>
           </IconButton>
-          <StoreIconButton>
+          <StoreIconButton style={{ marginLeft: 15 }}>
             <StoreIcon/>
           </StoreIconButton>
-          <Search>
+
+          {isMatch ? <Drawer/>: (
+            <Search>
             <SearchIconWrapper >
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
+            <StyledInputBase 
               placeholder="Search…"
             />
           </Search>
+          )}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              aria-label=""
-              color="inherit"
-            >
-              <Badge badgeContent={1} color="secondary">
-                <ShoppingBasketIcon />
-              </Badge>
-            </IconButton>
+            <CarWidget/>
             <IconButton
               size="large"
               edge="end"
@@ -242,6 +224,7 @@ export default function PrimarySearchAppBar() {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <CarWidget/>
             <IconButton
               size="large"
               aria-label="show more"
@@ -250,7 +233,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <MoreIcon position='fixed'/>
             </IconButton>
           </Box>
         </Toolbar>
