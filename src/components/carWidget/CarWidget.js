@@ -5,7 +5,7 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 export default function CarWidget() {
   return(
     <IconButton
-      font-size="large"
+      fontSize="large"
       aria-label="Show carts items"
       color="inherit"
   >

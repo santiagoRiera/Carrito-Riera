@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Box, Grid, Paper, styled } from '@material-ui/core';
+import ItemCount from './../itemCount/ItemCount'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -16,7 +17,9 @@ export default function ListItemContainer() {
           <Item style={{marginTop: '75px'}}>Example</Item>
         </Grid>
         <Grid item xs={6}>
-          <Item style={{marginTop: '75px'}}>Content</Item>
+          <Item style={{marginTop: '75px'}}>
+            <ItemCount/>
+          </Item>
         </Grid>
         <Grid item xs>
           <Item style={{marginTop: '75px'}}>Example</Item>
