@@ -60,7 +60,7 @@ export default function ItemCount() {
         <IconButton color="inherit" aria-label="remove" onClick={() => {handleCounter('Decrement')}}>
             <RemoveCircleIcon fontSize="large"/>
         </IconButton >
-        <TextField color='inherit' disabled="true" label="Elements to add" variant="standard" value={count}/>
+        <TextField disabled={true} label="Elements to add" variant="standard" value={count}/>
         <IconButton size="small" color="inherit" aria-label="Add" onClick={() => {handleCounter('Increment')}}>
             <AddCircleIcon fontSize="large"/>
         </IconButton>

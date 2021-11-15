@@ -56,19 +56,19 @@ const StoreIconButton = styled('div')(({ theme }) => ({
 
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const [anchorel1, setAnchorel1] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuListOpen = Boolean(anchorEl1);
+  const isMenuListOpen = Boolean(anchorel1);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMenuListOpen = (event) => {
-    setAnchorEl1(event.currentTarget);
+    setAnchorel1(event.currentTarget);
   }
   const handleMenuListClose = () => {
-    setAnchorEl1(null);
+    setAnchorel1(null);
     //handleMobileMenuClose();
   };
 
@@ -96,7 +96,7 @@ export default function PrimarySearchAppBar() {
   const menuListId = 'primary-search-menu-list';
   const renderMenuList = (
     <Menu
-      anchorEl1={anchorEl1}
+      anchorel1={anchorel1}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'left',
@@ -226,7 +226,7 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
           <CarWidget/>
             <IconButton
-              size="large"
+             
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
