@@ -4,6 +4,7 @@ import ItemCount from './../itemCount/ItemCount'
 import ItemList from './../itemList/ItemList'
 import getProducts from './../../services/handleData'
 import { useState, useEffect } from 'react';
+import ItemDetailContainer from '../itemDetailContainer/ItemDetailContainer';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -36,6 +37,11 @@ export default function ListItemContainer() {
         <Grid item xs>
           <Item elevation={0}>
             <ItemList products={products}/>
+          </Item>
+        </Grid>
+        <Grid item xs={12}>
+          <Item>
+            <ItemDetailContainer/>
           </Item>
         </Grid>
       </Grid>
