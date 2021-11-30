@@ -1,9 +1,20 @@
-import * as React from 'react';
-import {  CardActionArea, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Link } from "react-router-dom";
+import {  CardActionArea, Card, CardContent, CardMedia, Typography, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    card: {
+        height: "100%",
+    },
+    link: {
+        textDecoration: "none"
+    }
+})
 
 const Item = ({product}) => {
-    return (        
-        <Card>
+    const classes = useStyles()
+    return (   
+    <Link to={`/item/${product.id}`} className={classes.link}>
+        <Card className={classes.card}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -11,7 +22,7 @@ const Item = ({product}) => {
                     image={product.pictureUrl}
                     alt='Imagen de producto'
                 />
-                <CardContent>
+                <CardContent >
                     <Typography gutterBottom variant="h5" component="div">
                         {product.title}
                     </Typography>
@@ -24,6 +35,7 @@ const Item = ({product}) => {
                 </CardContent>
             </CardActionArea>
         </Card>
+    </Link>     
     );
 }
 

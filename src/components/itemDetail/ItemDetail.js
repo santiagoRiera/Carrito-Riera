@@ -6,7 +6,7 @@ const ItemDetail = ({item}) => {
           <Grid item sm={5}>
             <img src={item.pictureUrl} alt={item.pictureUrl} height="300px" width="100%" style={{ border:"solid 1px #eee", cursor: "pointer"}}/>
           </Grid>
-          <Grid item sm={7} spacing={1}>
+          <Grid item sm={7} >
               <Typography variant="subtitle1">Category: {item.category}</Typography>
               <Box mt={2}>
                 <Typography variant="h4">{item.title}</Typography>
