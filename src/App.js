@@ -1,11 +1,11 @@
 import { ThemeProvider } from '@material-ui/core';
-import { createMuiTheme } from '@mui/material';
+import { createTheme } from '@mui/material';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from './components/navbar/NavBar';
 import ItemListContainer from './components/itemListContainer/ItemListContainer';
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer"
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: '#2D82B7'

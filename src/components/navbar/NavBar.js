@@ -219,7 +219,7 @@ export default function PrimarySearchAppBar({color}) {
           </Search>
           )}
         
-          <Link to={'/category/Jordan'} className={classes.link}>
+         {/*  <Link to={'/category/Jordan'} className={classes.link}>
             <h5>Jordan - </h5>
           </Link>
           <Link to={'/category/Lifestyle'} className={classes.link}>
@@ -227,7 +227,7 @@ export default function PrimarySearchAppBar({color}) {
           </Link>
           <Link to={'/category/Running'} className={classes.link}>
           <h5> Running</h5>
-          </Link>
+          </Link> */}
           <Box sx={{ flexGrow: 1 }}/>          
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <CarWidget/>

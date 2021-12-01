@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
   return(
       <Grid item xs={12}>
         <Item style={{marginTop: '75px'}}>
-          <ItemDetail item={item} />;
+          <ItemDetail item={item}/>;
         </Item>
       </Grid>
   )  
