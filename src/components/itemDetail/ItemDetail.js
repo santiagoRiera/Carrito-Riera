@@ -8,7 +8,7 @@ const ItemDetail = ({item}) => {
   const [itemCount, setItemCount] = useState(true)
   const [addButton, setAddButton] = useState(true);
   const [itemsCount, setItemsCount] = useState(0);
-  const {addItem} = useCart()
+  const {addItem, products} = useCart()
 
   const onAdd = (count) => {
     setItemsCount(count)
@@ -45,7 +45,7 @@ const ItemDetail = ({item}) => {
                 <div>
                   <p style={{fontSize:"1.5rem", color: '#161412'}}>{itemsCount} products added</p>
                   <Link to="/cart" style={{textDecoration: 'none'}}>
-                    <Button onClick={() => onAddToCart (item, ItemCount)}  style={{background:'#ddd9d6'}}>Finalize purchase</Button>
+                    <Button style={{background:'#ddd9d6'}}>Finalize purchase</Button>
                   </Link>
                 </div>
               )}
