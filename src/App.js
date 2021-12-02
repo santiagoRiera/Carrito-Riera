@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from './components/navbar/NavBar';
 import ItemListContainer from './components/itemListContainer/ItemListContainer';
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer"
+import CartProvider from '../src/contexts/CartContext'
 
 const theme = createTheme({
   palette: {
@@ -25,6 +26,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CartProvider>
         <BrowserRouter>
           <NavBar />
           <Routes>
@@ -33,6 +35,7 @@ function App() {
             <Route path="/item/:id" element={<ItemDetailContainer />} /> 
           </Routes>
         </BrowserRouter>
+      </CartProvider>
     </ThemeProvider>
     
     

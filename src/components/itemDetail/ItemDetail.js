@@ -2,18 +2,20 @@ import { Box, Button, Grid, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import ItemCount from './../itemCount/ItemCount'
+import { useCart } from '../../contexts/CartContext';
 
 const ItemDetail = ({item}) => {
   const [itemCount, setItemCount] = useState(true)
   const [addButton, setAddButton] = useState(true);
   const [itemsCount, setItemsCount] = useState(0);
+  const {addItem} = useCart()
 
   const onAdd = (count) => {
     setItemsCount(count)
-    console.log('OnAdd desde itemDetail')
   }
 
-  const onAddToCart = () => {
+  const onAddToCart = (item, quantity) => {
+    addItem(item, quantity)
     setItemCount(false);
     setAddButton(false);
   };
@@ -32,10 +34,10 @@ const ItemDetail = ({item}) => {
                </Box>
                
           </Grid>
-            <Grid item sm={12} spacing={2}>
+            <Grid item sm={12}>
                 <ItemCount stock={item.stock} initial={0} onAdd={onAdd} />
               {addButton && (
-                <Button onClick={onAddToCart} style={{backgroundColor:"#161412", border:"none", color:'#ddd9d6'}}>
+                <Button onClick={() => onAddToCart (item, ItemCount)} style={{backgroundColor:"#161412", border:"none", color:'#ddd9d6'}}>
                   Add to cart
                 </Button>
               )}
@@ -43,7 +45,7 @@ const ItemDetail = ({item}) => {
                 <div>
                   <p style={{fontSize:"1.5rem", color: '#161412'}}>{itemsCount} products added</p>
                   <Link to="/cart" style={{textDecoration: 'none'}}>
-                    <Button style={{background:'#ddd9d6'}}>Finalize purchase</Button>
+                    <Button onClick={() => onAddToCart (item, ItemCount)}  style={{background:'#ddd9d6'}}>Finalize purchase</Button>
                   </Link>
                 </div>
               )}

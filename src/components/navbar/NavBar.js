@@ -112,7 +112,7 @@ export default function PrimarySearchAppBar() {
       style={{transform: 'translateY(-15%)'}}
       anchorEl1={anchorEl1}
       anchorOrigin={{
-        vertical: 'bottoma',
+        vertical: 'bottom',
         horizontal: 'left',
       }}
       id={menuListId}
@@ -236,7 +236,9 @@ export default function PrimarySearchAppBar() {
         
           <Box sx={{ flexGrow: 1 }}/>          
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Link to={`/cart`} className={classes.link}>
             <CarWidget/>
+          </Link>
             <IconButton
               
               edge="end"
@@ -250,7 +252,9 @@ export default function PrimarySearchAppBar() {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-          <CarWidget/>
+          <Link to={`/cart`} className={classes.link}>
+            <CarWidget/>
+          </Link>
             <IconButton
              
               aria-label="show more"

@@ -21,13 +21,6 @@ export default function ItemCount({stock, initial, onAdd}) {
             setCount(newValue);
         }
     }
-
-    /* const onAdd = () => {
-        const message = `Agregaste ${count} producto`;
-        //   Utilizo un condicional ternario (condicional) ? (true) : (false)
-        count === 1 ? alert(message) : alert(`${message}s`);
-        
-      }; */
       useEffect(() => {
         onAdd(count);
       }, [count])
@@ -41,9 +34,6 @@ export default function ItemCount({stock, initial, onAdd}) {
         <IconButton size="small" style={{color: '#161412'}} aria-label="Add" onClick={handleAdd}>
             <AddCircleIcon fontSize="large"/>
         </IconButton>
-        {/* <IconButton color="primary" aria-label="Add to cart">
-            <Button variant="contained">Add</Button>
-        </IconButton>  */} 
     </Box>
             
   );

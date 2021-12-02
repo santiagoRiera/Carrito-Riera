@@ -63,3 +63,4 @@ const data = [
   })
 
 export default getProducts
+export {data}
