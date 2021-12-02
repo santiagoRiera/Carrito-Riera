@@ -7,9 +7,9 @@ export default function CarWidget() {
     <IconButton
       fontSize="large"
       aria-label="Show carts items"
-      color="inherit"
+      color="secondary"
   >
-  <Badge badgeContent={1} color="secondary">
+  <Badge badgeContent={1} color="primary">
     <ShoppingBasketIcon />
   </Badge>
   </IconButton>

@@ -10,12 +10,13 @@ import StoreIcon from '@mui/icons-material/Store';
 import CarWidget from '../carWidget/CarWidget';
 import { Link } from "react-router-dom";
 
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.05),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 1),
+    backgroundColor: alpha(theme.palette.common.black, 0.1),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -37,7 +38,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
+  color: 'secondary',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -51,32 +52,35 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const StoreIconButton = styled('div')(({ theme }) => ({
-  color: alpha(theme.palette.common.white)
+  color: 'secondary'
 }));
 
 const useStyles = makeStyles({
   link: {
-    color: 'white',
+    color: '#161412',
     textDecoration: "none",
-}
+},
+  searchIcon: {
+    color: '#161412'
+  }
 })
 
-export default function PrimarySearchAppBar({color}) {
+export default function PrimarySearchAppBar() {
   const classes = useStyles()
 
-  const [anchorel1, setAnchorel1] = React.useState(null);
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuListOpen = Boolean(anchorel1);
+  const isMenuListOpen = Boolean(anchorEl1);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMenuListOpen = (event) => {
-    setAnchorel1(event.currentTarget);
+    setAnchorEl1(event.currentTarget);
   }
   const handleMenuListClose = () => {
-    setAnchorel1(null);
+    setAnchorEl1(null);
     //handleMobileMenuClose();
   };
 
@@ -104,23 +108,34 @@ export default function PrimarySearchAppBar({color}) {
   const menuListId = 'primary-search-menu-list';
   const renderMenuList = (
     <Menu
-      anchorel1={anchorel1}
+      /* style={{marginTop:'-240px'}} */
+      style={{transform: 'translateY(-15%)'}}
+      anchorEl1={anchorEl1}
       anchorOrigin={{
-        vertical: 'top',
+        vertical: 'bottoma',
         horizontal: 'left',
       }}
       id={menuListId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'left',
       }}
       open={isMenuListOpen}
       onClose={handleMenuListClose}
     >
-      <MenuItem onClick={handleMenuListClose}>Jordan</MenuItem>
-      <MenuItem onClick={handleMenuListClose}>Lifestyle</MenuItem>
-      <MenuItem onClick={handleMenuListClose}>Running</MenuItem>
+      <Link to={`/category/Jordan`} className={classes.link}>
+        <MenuItem onClick={handleMenuListClose}>Jordan</MenuItem>
+      </Link>
+      <Link to={`/category/Lifestyle`} className={classes.link}>
+        <MenuItem onClick={handleMenuListClose}>Lifestyle</MenuItem>
+      </Link>
+      <Link to={`/category/Running`} className={classes.link}>
+        <MenuItem onClick={handleMenuListClose}>Running</MenuItem>
+      </Link>
+      <Link to={`/category/Walking`} className={classes.link}>
+        <MenuItem onClick={handleMenuListClose}>Walking</MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -173,7 +188,7 @@ export default function PrimarySearchAppBar({color}) {
         </Search>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
-          size="large"
+         
           aria-label="Account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
@@ -188,12 +203,12 @@ export default function PrimarySearchAppBar({color}) {
     
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color='secondary'>
+      <AppBar style={{background: '#ffffff'}}>
         <Toolbar>
           <IconButton
-            size="large"
+            
             edge="start"
-            color="inherit"
+            color="secondary"
             aria-label="open drawer"
             aria-controls={menuListId}
             aria-haspopup="true"
@@ -202,16 +217,16 @@ export default function PrimarySearchAppBar({color}) {
           >
             <MenuIcon/>
           </IconButton>
-          <StoreIconButton style={{ marginLeft: 15 }}>
+          <StoreIconButton color='secondary' style={{ marginLeft: 15 }}>
             <Link to={'/'} className={classes.link}>
-              <StoreIcon/>
+              <StoreIcon style={{color: '#161412'}}/>
             </Link>
           </StoreIconButton>
 
           {isMatch ? <Drawer/>: (
             <Search>
-            <SearchIconWrapper >
-              <SearchIcon />
+            <SearchIconWrapper>
+              <SearchIcon className={classes.searchIcon} />
             </SearchIconWrapper>
             <StyledInputBase 
               placeholder="Search…"
@@ -219,26 +234,17 @@ export default function PrimarySearchAppBar({color}) {
           </Search>
           )}
         
-         {/*  <Link to={'/category/Jordan'} className={classes.link}>
-            <h5>Jordan - </h5>
-          </Link>
-          <Link to={'/category/Lifestyle'} className={classes.link}>
-          <h5> Lifestyle - </h5>
-          </Link>
-          <Link to={'/category/Running'} className={classes.link}>
-          <h5> Running</h5>
-          </Link> */}
           <Box sx={{ flexGrow: 1 }}/>          
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <CarWidget/>
             <IconButton
-              size="large"
+              
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
+              color="secondary"
             >
               <AccountCircle />
             </IconButton>

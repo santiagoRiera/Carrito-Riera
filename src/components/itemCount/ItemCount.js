@@ -34,11 +34,11 @@ export default function ItemCount({stock, initial, onAdd}) {
 
   return (
     <Box sx={{ flexGrow: 1}}>
-        <IconButton color="inherit" aria-label="remove" onClick={handleRemove}>
+        <IconButton color="secondary" style={{color: '#161412'}} aria-label="remove" onClick={handleRemove}>
             <RemoveCircleIcon fontSize="large"/>
         </IconButton >
         <TextField disabled={true} label="Elements to add" variant="standard" value={count}/>
-        <IconButton size="small" color="inherit" aria-label="Add" onClick={handleAdd}>
+        <IconButton size="small" style={{color: '#161412'}} aria-label="Add" onClick={handleAdd}>
             <AddCircleIcon fontSize="large"/>
         </IconButton>
         {/* <IconButton color="primary" aria-label="Add to cart">

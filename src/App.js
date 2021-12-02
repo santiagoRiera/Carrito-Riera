@@ -8,11 +8,17 @@ import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailCont
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2D82B7'
+      main: '#5a473a'
     },
     secondary: {
-      main: '#42E2B8'
+      main: '#161412'
+    },
+    warning: {
+      main: '#ddd9d6'
     }
+  },
+  typography: {
+    fontFamily: "Arial"
   }
 })
 
@@ -20,7 +26,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <NavBar/>
+          <NavBar />
           <Routes>
             <Route path="/" element={<ItemListContainer/>}/>
             <Route path="/category/:category" element={<ItemListContainer />} /> 

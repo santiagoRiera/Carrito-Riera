@@ -1,10 +1,10 @@
 import * as React from 'react';
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { Box, Grid, Paper, styled } from '@material-ui/core';
+import { Box, Grid, Paper, styled, Typography, makeStyles } from '@material-ui/core';
 import ItemList from './../itemList/ItemList'
 import getProducts from './../../services/handleData'
+
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -13,37 +13,40 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const useStyles = makeStyles({
+  item1: {
+    background: '#ddd9d6',
+    marginTop: '65px',
+},
+})
+
 export default function ItemListContainer() {
   const [products, setProducts] = useState([])
-  const [selectFilter, setSelectFilter] = useState([])
+
+  const classes = useStyles()
+
+  const { category } = useParams()
 
   useEffect(() => {
     getProducts
     .then(res => {
+      category ? setProducts(res.filter((products) => products.category === category)) :
       setProducts(res)
-      console.log('Primer useEffct')
     })
     .catch(err => alert('Algo no funciono bien', err))
-  }, [])
-
-  const { cat } = useParams();
-
-  useEffect(() => {
-    if (cat) {
-      setSelectFilter( products.filter(res =>  res.category === cat))
-      console.log('useEffct if setSelectFiler')
-    } else{
-      setSelectFilter(products)
-      console.log('useEffct else')
-    }
-  }, [cat, products])
+  }, [category])
 
   return (
     <Box sx={{ flexGrow: 1}}>
       <Grid container spacing={3}>
-        <Grid item >
-          <Item elevation={0} style={{marginTop: '75px'}}>
-            <ItemList products={selectFilter}/>
+      <Grid item xs={12}>
+          <Item elevation={0} className={classes.item1}>
+            <Typography variant='h5' color='secondary'>Men's Shoes & Sneakers</Typography>
+          </Item>
+        </Grid>
+        <Grid item xs={12}>
+          <Item elevation={0}>
+            <ItemList products={products}/>
           </Item>
         </Grid>
       </Grid>

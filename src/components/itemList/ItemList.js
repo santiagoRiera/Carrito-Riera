@@ -4,10 +4,11 @@ import { Grid } from '@material-ui/core'
 const ItemList = ({products}) => {
     return(
         <Grid container spacing={2}>
+            
             {products.map(product => {
                 return(
                     <Grid item xs={12} sm={6} md={4}>
-                        <Item key={product.id} product={product}/>
+                        <Item product={product}/>
                     </Grid>
                 )
             })}

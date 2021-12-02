@@ -27,7 +27,7 @@ const Item = ({product}) => {
                         {product.title}
                     </Typography>
                     <Typography variant="body2" color="inherit">
-                        {product.description}
+                        {product.category}
                     </Typography>
                     <Typography variant="body2" color="inherit">
                         ${product.price}

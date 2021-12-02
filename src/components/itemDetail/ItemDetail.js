@@ -19,31 +19,31 @@ const ItemDetail = ({item}) => {
   };
 
     return (
-      <Grid container spacing={1} style={{maxWidth: 1100, margin: "0 auto"}}>
+      <Grid container spacing={2} style={{maxWidth: 1100, margin: "0 auto"}}>
           <Grid item sm={5} sx={12}>
             <img src={item.pictureUrl} alt={item.pictureUrl} height="300px" width="100%" style={{ border:"solid 1px #eee", cursor: "pointer"}}/>
           </Grid>
           <Grid item sm={7} sx={12}>
-              <Typography variant="subtitle1">Category: {item.category}</Typography>
+              <Typography variant="subtitle1" color='secondary'>Category: {item.category}</Typography>
               <Box mt={2}>
-                <Typography variant="h4">{item.title}</Typography>
-                <Typography variant="subtitle1">{item.description}</Typography>
-                <Typography variant="h5">${item.price}</Typography>
+                <Typography variant="h4" color='secondary'>{item.title}</Typography>
+                <Typography variant="subtitle1" color='secondary'>{item.description}</Typography>
+                <Typography variant="h5" color='secondary'>${item.price}</Typography>
                </Box>
                
           </Grid>
             <Grid item sm={12} spacing={2}>
                 <ItemCount stock={item.stock} initial={0} onAdd={onAdd} />
               {addButton && (
-                <Button onClick={onAddToCart} style={{backgroundColor:"rgb(79, 192, 172)", border:"none"}}>
+                <Button onClick={onAddToCart} style={{backgroundColor:"#161412", border:"none", color:'#ddd9d6'}}>
                   Add to cart
                 </Button>
               )}
               {!addButton && (
                 <div>
-                  <p style={{fontSize:"1.5rem"}}>{itemsCount} products added</p>
-                  <Link to="/cart">
-                    <Button>Finalize purchase</Button>
+                  <p style={{fontSize:"1.5rem", color: '#161412'}}>{itemsCount} products added</p>
+                  <Link to="/cart" style={{textDecoration: 'none'}}>
+                    <Button style={{background:'#ddd9d6'}}>Finalize purchase</Button>
                   </Link>
                 </div>
               )}
