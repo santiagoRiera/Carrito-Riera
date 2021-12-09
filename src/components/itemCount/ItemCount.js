@@ -5,8 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { Box, TextField} from '@material-ui/core'
 
-export default function ItemCount({stock, initial, onAdd}) {
-    const [ count, setCount ] = useState(initial)
+export default function ItemCount({stock, initial, count, setCount}) {
+    
 
     const handleAdd = () => {
         const newValue = count + 1;
@@ -21,9 +21,6 @@ export default function ItemCount({stock, initial, onAdd}) {
             setCount(newValue);
         }
     }
-      useEffect(() => {
-        onAdd(count);
-      }, [count])
 
   return (
     <Box sx={{ flexGrow: 1}}>

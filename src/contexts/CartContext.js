@@ -7,31 +7,31 @@ export const useCart = () => useContext(CartContext)
 const CartProvider = ({children}) => {
     const [products, setProducts] = useState([])
 
-    const addItem = (data, cantidad) => {
-        if (isInCart(data)) {
+    const addItem = (item, quantity) => {
+        if (isInCart(item)) {
             products.map(prod => {
-                if (prod.id === data.id){
-                    return prod.quantity += cantidad
+                if (prod.id === item.id){
+                    return prod.quantity += quantity
                 }
             })
         }else{
             setProducts(state => {
-                return[...state, {...data, quantity: cantidad}]
+                return[...state, {...item, quantity: quantity}]
             })
         }
     }
 
-    const removeItem = (product) => {
-        const dataFiltrada = products.filter((elem) => elem !== product)
-        setProducts(dataFiltrada)
+    const removeItem = (id) => {
+        const newCart = products.filter(cartItem => cartItem.id !== id)
+        setProducts(newCart)
     }
 
     function clear() {
         setProducts([])
     }
 
-    const isInCart = (data) => {
-        return (products?.find(elem => elem.id === data.id) != null)
+    const isInCart = (item) => {
+        return (products?.find(elem => elem.id === item.id) != null)
     }
     const totalItems = () => products.reduce((acum, items) => acum + items.quantity, 0)
     const totalPrice = () => products.reduce((acum, items) => acum + (items.price * items.quantity), 0)

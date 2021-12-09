@@ -4,16 +4,14 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useCart } from '../../contexts/CartContext';
 
 export default function CarWidget() {
-  const { products } = useCart()
-  console.log(products)
-
+  const { totalItems } = useCart()
   return(
     <IconButton
       fontSize="large"
       aria-label="Show carts items"
       color="secondary"
   >
-  <Badge badgeContent={0} color="primary">
+  <Badge badgeContent={totalItems()} color="primary">
     <ShoppingBasketIcon />
   </Badge>
   </IconButton>

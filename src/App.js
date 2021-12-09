@@ -5,6 +5,7 @@ import NavBar from './components/navbar/NavBar';
 import ItemListContainer from './components/itemListContainer/ItemListContainer';
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer"
 import CartProvider from '../src/contexts/CartContext'
+import Cart from "./components/cart/Cart"
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<ItemListContainer/>}/>
+            <Route path="/cart" element={<Cart/>}/>
             <Route path="/category/:category" element={<ItemListContainer />} /> 
             <Route path="/item/:id" element={<ItemDetailContainer />} /> 
           </Routes>
