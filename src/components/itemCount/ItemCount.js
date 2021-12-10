@@ -1,12 +1,9 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconButton from '@mui/material/IconButton';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { Box, TextField} from '@material-ui/core'
 
 export default function ItemCount({stock, initial, count, setCount}) {
-    
 
     const handleAdd = () => {
         const newValue = count + 1;

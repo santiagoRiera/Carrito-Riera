@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import {Box, Drawer, Toolbar, IconButton, InputBase, MenuItem, Menu, useMediaQuery, useTheme,  makeStyles } from '@material-ui/core';
@@ -9,7 +9,6 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import StoreIcon from '@mui/icons-material/Store';
 import CarWidget from '../carWidget/CarWidget';
 import { Link } from "react-router-dom";
-
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,9 +67,9 @@ const useStyles = makeStyles({
 export default function PrimarySearchAppBar() {
   const classes = useStyles()
 
-  const [anchorEl1, setAnchorEl1] = React.useState(null);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl1, setAnchorEl1] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuListOpen = Boolean(anchorEl1);
   const isMenuOpen = Boolean(anchorEl);
@@ -126,6 +125,9 @@ export default function PrimarySearchAppBar() {
     >
       <Link to={`/category/Jordan`} className={classes.link}>
         <MenuItem onClick={handleMenuListClose}>Jordan</MenuItem>
+      </Link>
+      <Link to={`/category/Basketball`} className={classes.link}>
+        <MenuItem onClick={handleMenuListClose}>Basketball</MenuItem>
       </Link>
       <Link to={`/category/Lifestyle`} className={classes.link}>
         <MenuItem onClick={handleMenuListClose}>Lifestyle</MenuItem>

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import getProducts from './../../services/handleData'
 import ItemDetail from "./../itemDetail/ItemDetail";
 import { Grid, Paper, styled } from '@material-ui/core';
+import { getDoc, getFirestore, doc } from "firebase/firestore"
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -16,10 +16,11 @@ const ItemDetailContainer = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    getProducts
-    .then((res) => {
-      setItem(res.find((prod) => prod.id === parseInt(id)));
-    })
+    const db = getFirestore();
+    const itemsCollection = doc(db, "item", id);
+    getDoc(itemsCollection).then((snapshot) =>{
+        setItem({id: snapshot.id, ...snapshot.data()});
+        })
   }, [id]);
   return(
       <Grid item xs={12}>

@@ -8,8 +8,6 @@ const ItemDetail = ({item}) => {
   const [ count, setCount ] = useState(0)
   const {addItem, products} = useCart()
 
-  
-
   const onAddToCart = (item, quantity) => {
     addItem(item, quantity)
   }

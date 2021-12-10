@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Box, Grid, Paper, styled, Typography, makeStyles } from '@material-ui/core';
 import ItemList from './../itemList/ItemList'
-import getProducts from './../../services/handleData'
+import app from "./../firebase/Firebase"
+import {collection, getDocs, getFirestore, orderBy, query, where} from "firebase/firestore"
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -28,12 +28,19 @@ export default function ItemListContainer() {
   const { category } = useParams()
 
   useEffect(() => {
-    getProducts
-    .then(res => {
-      category ? setProducts(res.filter((products) => products.category === category)) :
-      setProducts(res)
-    })
-    .catch(err => alert('Algo no funciono bien', err))
+    const db = getFirestore();
+    const itemsCollection = collection(db, "item");
+    const q = category
+      ? query(itemsCollection, where("category", "==", category))
+      : query(itemsCollection, orderBy("category"));
+    getDocs(q).then((snapshot) => {
+      if (category === undefined) {
+        setProducts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      } else {
+        let data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        setProducts(data);
+      }
+    });
   }, [category])
 
   return (
