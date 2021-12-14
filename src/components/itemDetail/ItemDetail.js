@@ -36,11 +36,11 @@ const ItemDetail = ({item}) => {
               <Box>
                 <ItemCount stock={item.stock} initial={0} count={count} setCount={setCount}  />
                 <Button onClick={() => onAddToCart (item, count)} style={{background:'white', border: 'solid 1px', borderColor: '#161412', marginTop: '15px'}}>
-                  Add to cart
+                  Add product
                 </Button>
               </Box>
               <Link to="/cart" style={{textDecoration: 'none'}}>
-                  <Button style={{background:'white', marginTop: '20px', border: 'solid 1px', borderColor: '#161412' }}>Finalize purchase</Button>
+                  <Button style={{background:'white', marginTop: '20px', border: 'solid 1px', borderColor: '#161412' }}>Go to cart</Button>
               </Link>
           </Grid>
                 

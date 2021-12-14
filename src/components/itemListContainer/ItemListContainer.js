@@ -32,7 +32,7 @@ export default function ItemListContainer() {
     const itemsCollection = collection(db, "item");
     const q = category
       ? query(itemsCollection, where("category", "==", category))
-      : query(itemsCollection, orderBy("category"));
+      : query(itemsCollection, orderBy("price", 'desc'));
     getDocs(q).then((snapshot) => {
       if (category === undefined) {
         setProducts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));

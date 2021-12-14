@@ -6,6 +6,7 @@ import ItemListContainer from './components/itemListContainer/ItemListContainer'
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer"
 import CartProvider from '../src/contexts/CartContext'
 import Cart from "./components/cart/Cart"
+import Checkout from "./components/cart/Checkout"
 
 const theme = createTheme({
   palette: {
@@ -33,6 +34,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ItemListContainer/>}/>
             <Route path="/cart" element={<Cart/>}/>
+            <Route path='/cart/checkout' element= {<Checkout />} />
             <Route path="/category/:category" element={<ItemListContainer />} /> 
             <Route path="/item/:id" element={<ItemDetailContainer />} /> 
           </Routes>

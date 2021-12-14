@@ -1,8 +1,10 @@
-import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography, makeStyles, IconButton } from '@material-ui/core'
+import { Avatar, Button, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography, makeStyles, IconButton,  } from '@material-ui/core'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Fragment } from 'react'
 import { Link } from "react-router-dom"
 import { useCart } from '../../contexts/CartContext'
+import ModalForm from './ModalForm'
+
 
 const useStyles = makeStyles({
     image: {
@@ -22,6 +24,13 @@ const useStyles = makeStyles({
     summary: {
         postion: 'fixed',  
         top: '-55px'
+    },
+    button: {
+        background:'white', 
+        border: 'solid 1px', 
+        borderColor: '#161412', 
+        color: '#161412', 
+        marginTop: '15px'
     }
 })
 
@@ -102,19 +111,40 @@ const Cart = () => {
                     {totalItems() === 0 ? 
                         <ListItem alignItems="center" divider>
                             <Typography variant='body1'>0 products added</Typography>
-                        </ListItem> : (
+                        </ListItem>
+                         : (
+                        <>
                         <ListItem alignItems="center" divider>
                             <Typography variant='body1'>Products: {totalItems()}</Typography>
                         </ListItem>
+                        <ListItem alignItems="center">
+                        
+                        </ListItem>
+                        </>
                     )}
                     {totalPrice() === 0 ? 
+                    <>
                         <ListItem alignItems="center" divider>
                             <Typography variant='body1'>Total: $0</Typography>
-                        </ListItem> : (
+                        </ListItem>
+                        <ListItem>
+                            <ModalForm/>
+                        </ListItem>
+                    </>: (
+                    <>
                         <ListItem alignItems="center" divider>
                             <Typography variant='body1'>Total: ${totalPrice()}</Typography>
                         </ListItem>
+                        <ListItem>
+                            <Link to="/cart/checkout" style={{textDecoration: "none"}}>
+                            <Button style={{background:'white', border: 'solid 1px', borderColor: '#161412', color: '#161412', marginTop: '15px'}}>
+                                Checkout
+                            </Button>  
+                            </Link>
+                        </ListItem>
+                    </>
                     )}
+                    
                 </List>
             </Grid>
         </Grid>
