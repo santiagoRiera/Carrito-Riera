@@ -24,7 +24,7 @@ export default function ItemCount({stock, initial, count, setCount}) {
         <IconButton color="secondary" style={{color: '#161412'}} aria-label="remove" onClick={handleRemove}>
             <RemoveCircleIcon fontSize="large"/>
         </IconButton >
-        <TextField disabled={true} label="Elements to add" variant="standard" value={count}/>
+        <TextField disabled={true} label="" variant="standard" value={count} fullWidth={true} style={{maxWidth: '80px', marginTop: '10px'}}/>
         <IconButton size="small" style={{color: '#161412'}} aria-label="Add" onClick={handleAdd}>
             <AddCircleIcon fontSize="large"/>
         </IconButton>

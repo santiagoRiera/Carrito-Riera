@@ -1,8 +1,18 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { Box, Button,Typography, makeStyles, Modal } from '@material-ui/core'
+import { useState } from 'react';
+
+const useStyles = makeStyles({
+  button: {
+    background:'white', 
+    border: 'solid 1px', 
+    borderColor: '#161412', 
+    marginTop: '15px',
+    marginBottom: '14px',
+      '&:hover': {
+          background: '#ddd9d6'
+       },
+  },
+})
 
 const style = {
   position: 'absolute',
@@ -17,17 +27,14 @@ const style = {
 };
 
 export default function ModalForm() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const classes = useStyles()
 
   return (
     <div>
-        <Button onClick={handleOpen} style={{background:'white', 
-        border: 'solid 1px', 
-        borderColor: '#161412',
-        color: '#161412', 
-        marginTop: '15px'}}>Checkout</Button>
+        <Button onClick={handleOpen} className={classes.button}>Checkout</Button>
       <Modal
         open={open}
         onClose={handleClose}

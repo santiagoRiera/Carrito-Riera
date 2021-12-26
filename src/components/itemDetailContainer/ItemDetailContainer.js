@@ -23,11 +23,11 @@ const ItemDetailContainer = () => {
         })
   }, [id]);
   return(
-      <Grid item xs={12}>
-        <Item style={{marginTop: '75px'}}>
-          <ItemDetail item={item}/>;
-        </Item>
-      </Grid>
+        <Grid item xs={12}>
+          <Item style={{marginTop: '75px'}}>
+            <ItemDetail item={item}/>;
+          </Item>
+        </Grid>
   )  
 };
 export default ItemDetailContainer;

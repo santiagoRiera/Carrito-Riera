@@ -5,7 +5,6 @@ import ItemList from './../itemList/ItemList'
 import app from "./../firebase/Firebase"
 import {collection, getDocs, getFirestore, orderBy, query, where} from "firebase/firestore"
 
-
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -49,6 +48,7 @@ export default function ItemListContainer() {
       <Grid item xs={12}>
           <Item elevation={0} className={classes.item1}>
             <Typography variant='h5' color='secondary'>Men's Shoes & Sneakers</Typography>
+            <Typography variant='subtitle' color='secondary'>{category}</Typography>
           </Item>
         </Grid>
         <Grid item xs={12}>

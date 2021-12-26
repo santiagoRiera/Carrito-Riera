@@ -29,9 +29,12 @@ const useStyles = makeStyles({
         background:'white', 
         border: 'solid 1px', 
         borderColor: '#161412', 
-        color: '#161412', 
-        marginTop: '15px'
-    }
+        marginTop: '15px',
+        marginBottom: '14px',
+          '&:hover': {
+              background: '#ddd9d6'
+           },
+      },
 })
 
 const Cart = () => {
@@ -46,105 +49,92 @@ const Cart = () => {
             <ListItem className={classes.listItem}>
                 <Typography variant='h5'>Bag</Typography>
             </ListItem>
-            {products <= 0 ? 
-                 <>
-                 <Grid item md={6} className={classes.item}>
-                     <List>
-                         <ListItem alignItems="center" divider>
+            <Grid item md={6} className={classes.item}>
+                {products <= 0 ? 
+                    <List>
+                        <ListItem alignItems="center" divider>
                             <ListItemText>
                                 <Typography>There are not items in your bag</Typography>
                             </ListItemText>
                         </ListItem>
-                     </List>
-                 </Grid>
-                 </> : (
-                     products.map(products => {
-                         return(
-                             <>
-                             <Grid item md={6} className={classes.item}>
-                                 <List>
-                                     <ListItem alignItems="center" divider>
-                                         <ListItemAvatar>
+                    </List>
+                    : (
+                        products.map(products => {
+                                return(
+                                    <List>
+                                        <ListItem alignItems="center" divider>
+                                            <ListItemAvatar>
                                             <Link to={`/item/${products.id}`} style={{textDecoration: "none", color:'inherit'}} >
                                                 <Avatar alt={products.title} src={products.pictureUrl} className={classes.image} />
                                             </Link>
-                                         </ListItemAvatar>
-                                         <ListItemText
-                                             className={classes.listItem}
-                                             primary={
-                                                 <Fragment>
-                                                     <Typography variant='h5' align='justfy'>
-                                                         <Link to={`/item/${products.id}`} style={{textDecoration: "none", color:'inherit'}} >
-                                                            {products.title} - 
-                                                           $ {products.price}
-                                                         </Link>
-                                                     </Typography>
-                                                 </Fragment>}
-                                             secondary={
-                                                 <Fragment>
-                                                     <Typography
-                                                         sx={{ display: 'inline' }}
-                                                         component="span"
-                                                         variant="subtitle2"
-                                                         color="text.primary"
-                                                     >
-                                                     {products.category}
-                                                     </Typography>
-                                                 </Fragment>
-                                             }
-                                         />
-                                         <IconButton >
-                                             <DeleteIcon onClick={() => handleRemove(products.id)} style={{color: '#161412'}}/>
-                                         </IconButton>
-                                         </ListItem>
-                                 </List>
-                             </Grid>
-                             </>
-                         )
-                     })
-                 )}
+                                            </ListItemAvatar>
+                                            <ListItemText
+                                                className={classes.listItem}
+                                                primary={
+                                                    <Fragment>
+                                                        <Typography variant='h5' align='justfy'>
+                                                            <Link to={`/item/${products.id}`} style={{textDecoration: "none", color:'inherit'}} >
+                                                            {products.title} <br/>
+                                                            $ {products.price}
+                                                            </Link>
+                                                        </Typography>
+                                                    </Fragment>}
+                                                secondary={
+                                                    <Fragment>
+                                                        <Typography
+                                                            sx={{ display: 'inline' }}
+                                                            component="span"
+                                                            variant="subtitle2"
+                                                            color="text.primary"
+                                                        >
+                                                        {products.category} - Quantity: {products.quantity}
+                                                        </Typography>
+                                                    </Fragment>
+                                                }
+                                            />
+                                            <IconButton >
+                                                <DeleteIcon onClick={() => handleRemove(products.id)} style={{color: '#161412'}}/>
+                                            </IconButton>
+                                            </ListItem>
+                                    </List>
+                                )
+                        })
+                )}
+            </Grid>
             <Grid item md={5} className={classes.item}>
                 <List className={classes.summary}>
                     <ListItem alignItems="center">
                         <Typography variant='h5'>Summary</Typography>
                     </ListItem>
-                    {totalItems() === 0 ? 
-                        <ListItem alignItems="center" divider>
-                            <Typography variant='body1'>0 products added</Typography>
-                        </ListItem>
+                    {totalItems() === 0 ?
+                        <List>
+                            <ListItem alignItems="center" divider>
+                                <Typography variant='body1'>0 products added</Typography>
+                            </ListItem>
+                            <ListItem alignItems="center" divider>
+                                <Typography variant='body1'>Total: $0</Typography>
+                            </ListItem>
+                            <ListItem>
+                                <ModalForm/>
+                            </ListItem>
+                        </List> 
                          : (
-                        <>
-                        <ListItem alignItems="center" divider>
-                            <Typography variant='body1'>Products: {totalItems()}</Typography>
-                        </ListItem>
-                        <ListItem alignItems="center">
-                        
-                        </ListItem>
-                        </>
+                        <List>
+                            <ListItem alignItems="center" divider>
+                                <Typography variant='body1'>Products: {totalItems()}</Typography>
+                            </ListItem>
+                            <ListItem alignItems="center" divider>
+                                <Typography variant='body1'>Total: ${totalPrice()}</Typography>
+                            </ListItem>
+                            <ListItem divider>
+                                <Link to="/cart/checkout" style={{textDecoration: "none"}}>
+                                    <Button className={classes.button}>
+                                        Checkout
+                                    </Button>  
+                                </Link>
+                            </ListItem>
+                        </List>
                     )}
-                    {totalPrice() === 0 ? 
-                    <>
-                        <ListItem alignItems="center" divider>
-                            <Typography variant='body1'>Total: $0</Typography>
-                        </ListItem>
-                        <ListItem>
-                            <ModalForm/>
-                        </ListItem>
-                    </>: (
-                    <>
-                        <ListItem alignItems="center" divider>
-                            <Typography variant='body1'>Total: ${totalPrice()}</Typography>
-                        </ListItem>
-                        <ListItem>
-                            <Link to="/cart/checkout" style={{textDecoration: "none"}}>
-                            <Button style={{background:'white', border: 'solid 1px', borderColor: '#161412', color: '#161412', marginTop: '15px'}}>
-                                Checkout
-                            </Button>  
-                            </Link>
-                        </ListItem>
-                    </>
-                    )}
-                    
                 </List>
             </Grid>
         </Grid>

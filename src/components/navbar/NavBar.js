@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import {Box, Drawer, Toolbar, IconButton, InputBase, MenuItem, Menu, useMediaQuery, useTheme,  makeStyles } from '@material-ui/core';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import StoreIcon from '@mui/icons-material/Store';
 import CarWidget from '../carWidget/CarWidget';
+import Sidebar from './Drawer'
 import { Link } from "react-router-dom";
+import {collection, getFirestore} from "firebase/firestore"
+import CloseIcon from "@material-ui/icons/Close";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -50,15 +52,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const StoreIconButton = styled('div')(({ theme }) => ({
+const StoreIconButton = styled('div')(() => ({
   color: 'secondary'
 }));
 
 const useStyles = makeStyles({
-  link: {
-    color: '#161412',
-    textDecoration: "none",
-},
   searchIcon: {
     color: '#161412'
   }
@@ -67,21 +65,11 @@ const useStyles = makeStyles({
 export default function PrimarySearchAppBar() {
   const classes = useStyles()
 
-  const [anchorEl1, setAnchorEl1] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-  const isMenuListOpen = Boolean(anchorEl1);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleMenuListOpen = (event) => {
-    setAnchorEl1(event.currentTarget);
-  }
-  const handleMenuListClose = () => {
-    setAnchorEl1(null);
-    //handleMobileMenuClose();
-  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -103,43 +91,6 @@ export default function PrimarySearchAppBar() {
   const themeNavBar = useTheme()
 
   const isMatch = useMediaQuery(themeNavBar.breakpoints.down('sm'))
-
-  const menuListId = 'primary-search-menu-list';
-  const renderMenuList = (
-    <Menu
-      /* style={{marginTop:'-240px'}} */
-      style={{transform: 'translateY(-15%)'}}
-      anchorEl1={anchorEl1}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
-      }}
-      id={menuListId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
-      }}
-      open={isMenuListOpen}
-      onClose={handleMenuListClose}
-    >
-      <Link to={`/category/Jordan`} className={classes.link}>
-        <MenuItem onClick={handleMenuListClose}>Jordan</MenuItem>
-      </Link>
-      <Link to={`/category/Basketball`} className={classes.link}>
-        <MenuItem onClick={handleMenuListClose}>Basketball</MenuItem>
-      </Link>
-      <Link to={`/category/Lifestyle`} className={classes.link}>
-        <MenuItem onClick={handleMenuListClose}>Lifestyle</MenuItem>
-      </Link>
-      <Link to={`/category/Running`} className={classes.link}>
-        <MenuItem onClick={handleMenuListClose}>Running</MenuItem>
-      </Link>
-      <Link to={`/category/Walking`} className={classes.link}>
-        <MenuItem onClick={handleMenuListClose}>Walking</MenuItem>
-      </Link>
-    </Menu>
-  );
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -208,16 +159,10 @@ export default function PrimarySearchAppBar() {
       <AppBar style={{background: '#ffffff'}}>
         <Toolbar>
           <IconButton
-            
             edge="start"
-            color="secondary"
-            aria-label="open drawer"
-            aria-controls={menuListId}
-            aria-haspopup="true"
-            onClick={handleMenuListOpen}
-            sx={{ mr: 1 }}  
+            color="secondary" 
           >
-            <MenuIcon/>
+            <Sidebar/>
           </IconButton>
           <StoreIconButton color='secondary' style={{ marginLeft: 15 }}>
             <Link to={'/'} className={classes.link}>
@@ -227,13 +172,11 @@ export default function PrimarySearchAppBar() {
 
           {isMatch ? <Drawer/>: (
             <Search>
-            <SearchIconWrapper>
-              <SearchIcon className={classes.searchIcon} />
-            </SearchIconWrapper>
-            <StyledInputBase 
-              placeholder="Search…"
-            />
-          </Search>
+                <SearchIconWrapper>
+                  <SearchIcon className={classes.searchIcon} />
+                </SearchIconWrapper>
+                <StyledInputBase placeholder="Search…"/>
+            </Search>
           )}
         
           <Box sx={{ flexGrow: 1 }}/>          
@@ -270,7 +213,6 @@ export default function PrimarySearchAppBar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMenuList}
       {renderMobileMenu}
       {renderMenu}
     </Box>
